@@ -1,0 +1,25 @@
+<p>structural-directives works!</p>
+<!-- if else -->
+<!-- synatx 1 -->
+<p *ngIf="displayName; else elseStatement">if statement for syntax 1</p>
+<ng-template #elseStatement>
+  <p>Else statement for syntax 1</p>
+</ng-template>
+
+<!-- syntax 2 -->
+<div *ngIf="displayName; then ifBlock; else elseBlock"></div>
+<ng-template #ifBlock>If statement for syntax 2</ng-template>
+<ng-template #elseBlock>Else statement for syntax 2</ng-template>
+
+<!-- switch statement -->
+<div [ngSwitch]="color">
+  <div *ngSwitchCase="'red'" [style.color]="color">Color is red</div>
+  <div *ngSwitchCase="'orange'" [style.color]="color">Color is orange</div>
+  <div *ngSwitchCase="'blue'" [style.color]="color">Color is blue</div>
+  <div *ngSwitchDefault></div>
+</div>
+
+<!-- ngFor for lists -->
+<ul *ngFor="let color of colors">
+  <li [style.color]="color">{{ color }}</li>
+</ul>

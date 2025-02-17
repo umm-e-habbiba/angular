@@ -227,7 +227,11 @@
       </svg>
       <h1>Hello, {{ title }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
-      <app-test></app-test>
+      <app-test (childEvent)="message = $event" [userName]="name"></app-test>
+      <!-- message from child component -->
+      <p>{{ message }}</p>
+      <!-- <h2>Structural directives</h2>
+      <app-structural-directives></app-structural-directives> -->
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
