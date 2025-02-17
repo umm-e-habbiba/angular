@@ -1,0 +1,5 @@
+<p>employee-list</p>
+<ul *ngFor="let emp of employees">
+  <li>{{ emp.name }}</li>
+</ul>
+<button (click)="addEmployee({ id: 4, name: 'new', age: '26' })">Add</button>

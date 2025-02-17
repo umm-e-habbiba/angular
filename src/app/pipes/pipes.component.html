@@ -1,0 +1,50 @@
+<!-- *********string pipes************ -->
+<p>{{ name | lowercase }}</p>
+<!--ume habiba-->
+<p>{{ name | uppercase }}</p>
+<!--UME HABIBA-->
+<p>{{ message | titlecase }}</p>
+<!--Learning Angular Basics-->
+<p>{{ name | slice : 3 : 7 }}</p>
+<!-- HAB -->
+<p>{{ person | json }}</p>
+<!--{ "fName": "ume", "lName": "habiba" }-->
+<!-- **************numbers pipes********** -->
+<h2>{{ 5.678 | number : "1.2-3" }}</h2>
+<!--5.678-->
+<h2>{{ 5.678 | number : "3.4-5" }}</h2>
+<!--005.6780-->
+<h2>{{ 5.678 | number : "3.1-2" }}</h2>
+<!--005.68-->
+
+<h2>{{ 0.25 | percent }}</h2>
+<!--25%-->
+
+<!-- **************currency pipes********** -->
+
+<h2>{{ 0.75 | currency }}</h2>
+<!--$0.75-->
+<h2>{{ 0.75 | currency : "GBP" }}</h2>
+<!--£0.75-->
+<!-- with symbol-->
+<h2>{{ 0.75 | currency : "GBP" : "code" }}</h2>
+<!--GBP0.75-->
+<!-- without symbol-->
+
+<!-- **************date pipes********** -->
+<h2>{{ date }}</h2>
+<!-- Mon Feb 17 2025 23:56:48 GMT+0500 (Pakistan Standard Time) -->
+<h2>{{ date | date : "short" }}</h2>
+<!-- 2/17/25, 11:56 PM -->
+<h2>{{ date | date : "shortDate" }}</h2>
+<!-- 2/17/25 -->
+<h2>{{ date | date : "shortTime" }}</h2>
+<!-- 11:56 PM -->
+<h2>{{ date | date : "mediumDate" }}</h2>
+<!-- Feb 17, 2025 -->
+<h2>{{ date | date : "mediumTime" }}</h2>
+<!-- 11:56:48 PM -->
+<h2>{{ date | date : "longDate" }}</h2>
+<!-- February 17, 2025 -->
+<h2>{{ date | date : "longTime" }}</h2>
+<!-- 11:56:48 PM GMT+5 -->
