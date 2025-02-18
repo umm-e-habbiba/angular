@@ -1,4 +1,5 @@
 <p>employee-detail</p>
+<p style="color: red">{{ errorMsg }}</p>
 <ul *ngFor="let emp of employees">
-  <li>{{ emp?.id + "-" + emp?.name + "-" + emp?.age }}</li>
+  <li>{{ emp?.id + "-" + emp?.name + "-" + emp?.email }}</li>
 </ul>
