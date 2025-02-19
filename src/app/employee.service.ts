@@ -13,7 +13,7 @@ export class EmployeeService {
     { id: 3, name: 'geh', age: '22' },
   ];
   constructor(private http: HttpClient) {}
-  private _url: string = 'https://jsonplaceholder.typicode.com/user2';
+  private _url: string = 'https://jsonplaceholder.typicode.com/user';
 
   getEmployess(): Observable<IEmployee[]> {
     // return this.employess;
