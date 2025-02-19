@@ -5,6 +5,7 @@ import { StructuralDirectivesComponent } from './structural-directives/structura
 import { PipesComponent } from './pipes/pipes.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 @Component({
   selector: 'app-root',
   imports: [
@@ -14,6 +15,7 @@ import { EmployeeDetailComponent } from './employee-detail/employee-detail.compo
     PipesComponent,
     EmployeeListComponent,
     EmployeeDetailComponent,
+    NavbarComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
