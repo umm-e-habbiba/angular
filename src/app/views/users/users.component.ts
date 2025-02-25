@@ -31,7 +31,7 @@ export class UsersComponent {
     });
   }
   onSelect(user: IEmployee) {
-    this.router.navigate(['/user', user.id]);
+    this.router.navigate(['/users', user.id]);
   }
   isSelected(Id: string) {
     return Id === this.currentId;

@@ -26,14 +26,14 @@ export class UsersDetailComponent {
     if (this.userId !== null) {
       if (parseInt(this.userId) > 1) {
         let prevID: number | null = parseInt(this.userId) - 1;
-        this.router.navigate(['/user', prevID]);
+        this.router.navigate(['/users', prevID]);
       }
     }
   }
   goNext() {
     if (this.userId !== null) {
       let nextID: number | null = parseInt(this.userId) + 1;
-      this.router.navigate(['/user', nextID]);
+      this.router.navigate(['/users', nextID]);
     }
   }
   goBack() {
