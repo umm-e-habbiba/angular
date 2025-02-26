@@ -5,6 +5,7 @@ import { MainComponent } from './views/main/main.component';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 import { UsersDetailComponent } from './views/users-detail/users-detail.component';
 import { PostDetailComponent } from './views/post-detail/post-detail.component';
+import { CommentsComponent } from './views/comments/comments.component';
 
 export const routes: Routes = [
   // {path: '', redirectTo:'/users',pathMatch:'full'}, //if we want /users as our default route
@@ -12,7 +13,11 @@ export const routes: Routes = [
   { path: 'posts', component: PostsComponent },
   { path: 'users', component: UsersComponent },
   { path: 'users/:id', component: UsersDetailComponent },
-  { path: 'posts/:id', component: PostDetailComponent },
+  {
+    path: 'posts/:id',
+    component: PostDetailComponent,
+    children: [{ path: 'comments', component: CommentsComponent }],
+  },
   // at the end add route for 404 (wild card should be the last route)
   { path: '**', component: PageNotFoundComponent },
 ];

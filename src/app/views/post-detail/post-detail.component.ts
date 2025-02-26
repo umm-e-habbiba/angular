@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PostsService } from '../../posts.service';
 import { IPost } from '../../../post';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { Location } from '@angular/common';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-post-detail',
-  imports: [RouterLink],
+  imports: [RouterLink, RouterOutlet, CommonModule],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',
 })
 export class PostDetailComponent {
   public postId: string | null = '';
   public errorMsg: string = '';
+  public isComments: boolean = false;
   public postData: IPost = {
     id: 0,
     title: '',
@@ -19,7 +22,9 @@ export class PostDetailComponent {
   };
   constructor(
     private postService: PostsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -31,8 +36,25 @@ export class PostDetailComponent {
         (error) => (this.errorMsg = error)
       );
     });
+    const currentUrl = this.location.path();
+    const urlContainsComments = currentUrl.includes('comments');
+    if (urlContainsComments) {
+      console.log('comments are showing');
+      this.isComments = true;
+    } else {
+      console.log('comments arenot showing');
+      this.isComments = false;
+    }
   }
   onSelectPost(id: string | null) {
     this.postService.selectPost(id);
+  }
+  showComments() {
+    this.isComments = true;
+    this.router.navigate(['comments'], { relativeTo: this.route });
+  }
+  hideComments() {
+    this.isComments = false;
+    this.router.navigate(['./'], { relativeTo: this.route });
   }
 }

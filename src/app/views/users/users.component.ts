@@ -31,7 +31,8 @@ export class UsersComponent {
     });
   }
   onSelect(user: IEmployee) {
-    this.router.navigate(['/users', user.id]);
+    this.router.navigate(['/users', user.id]); //absolute route
+    // this.router.navigate([user.id],{relativeTo:this.route}) // relative path
   }
   isSelected(Id: string) {
     return Id === this.currentId;

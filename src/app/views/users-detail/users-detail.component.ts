@@ -38,6 +38,9 @@ export class UsersDetailComponent {
   }
   goBack() {
     let currentID = this.userId ? this.userId : null;
-    this.router.navigate(['/users', { id: currentID }]);
+    this.router.navigate(['/users', { id: currentID }]); //absolute route
+    this.router.navigate(['../', { id: currentID }], {
+      relativeTo: this.route,
+    }); //relative route (../ means remove content after last / in url including /)
   }
 }
