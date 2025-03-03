@@ -10,5 +10,5 @@ import { User } from '../../../user';
 })
 export class TdfComponent {
   topics = ['Angular', 'React', 'Next'];
-  userModel = new User('ume', 'ume@gmail.com', 123, '', 'am', false);
+  userModel = new User('ume', 'ume@gmail.com', 1234567890, '', 'am', false);
 }

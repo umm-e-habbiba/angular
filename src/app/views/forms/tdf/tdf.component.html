@@ -1,10 +1,14 @@
 <form class="max-w-sm mx-auto py-8" #userForm="ngForm">
-  {{ userForm.value | json }}
+  <!-- {{ userForm.value | json }}
   <hr />
-  {{ userModel | json }}
+  {{ userModel | json }} -->
   <h1 class="text-3xl text-center font-bold my-3">TDF Form</h1>
   <div class="mb-5">
-    <label class="block mb-2 text-sm font-medium">Your name</label>
+    <label
+      class="block mb-2 text-sm font-medium"
+      [class.text-red-700.dark:text-red-500]="name.invalid && name.touched"
+      >Your name</label
+    >
     <input
       type="text"
       name="username"
@@ -12,7 +16,19 @@
       placeholder="name"
       required
       [(ngModel)]="userModel.name"
+      #name="ngModel"
+      [class.bg-red-50.border.border-red-500.text-red-900.placeholder-red-700.text-red-700.dark:text-red-500]="
+        name.invalid && name.touched
+      "
     />
+    <!-- {{ name.invalid }} -->
+    <!-- single validation rule -->
+    <p
+      [class.hidden]="name.valid || name.untouched"
+      class="mt-2 text-sm text-red-600 dark:text-red-500"
+    >
+      Username is required.
+    </p>
   </div>
   <div class="mb-5">
     <label class="block mb-2 text-sm font-medium">Your email</label>
@@ -34,7 +50,24 @@
       placeholder="phone"
       required
       [(ngModel)]="userModel.phone"
+      #phone="ngModel"
+      pattern="^\d{10}$"
     />
+    <!-- multiple validation rules -->
+    <div *ngIf="phone.errors && (phone.invalid || phone.touched)">
+      <p
+        *ngIf="phone.errors['required']"
+        class="mt-2 text-sm text-red-600 dark:text-red-500"
+      >
+        Phone number is required.
+      </p>
+      <p
+        *ngIf="phone.errors['pattern']"
+        class="mt-2 text-sm text-red-600 dark:text-red-500"
+      >
+        Phone number must be of 10 digits.
+      </p>
+    </div>
   </div>
   <!-- <div ngModelGroup="address">
     <div class="mb-5">
@@ -119,6 +152,10 @@
   </div>
   <button
     type="submit"
+    [disabled]="userForm.form.invalid"
+    [ngClass]="
+      userForm.form.invalid ? 'opacity-50 cursor-default' : 'cursor-pointer'
+    "
     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
   >
     Submit
