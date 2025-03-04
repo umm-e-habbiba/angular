@@ -6,6 +6,7 @@ import { EmployeeService } from './employee.service';
 import { provideHttpClient } from '@angular/common/http';
 import { UsersService } from './users.service';
 import { PostsService } from './posts.service';
+import { SubmitFormService } from './submit-form.service';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -13,6 +14,7 @@ export const appConfig: ApplicationConfig = {
     EmployeeService,
     UsersService,
     PostsService,
+    SubmitFormService,
     provideHttpClient(),
   ],
 };

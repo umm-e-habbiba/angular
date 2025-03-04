@@ -7,6 +7,7 @@ import { UsersDetailComponent } from './views/users-detail/users-detail.componen
 import { PostDetailComponent } from './views/post-detail/post-detail.component';
 import { CommentsComponent } from './views/comments/comments.component';
 import { TdfComponent } from './views/forms/tdf/tdf.component';
+import { ReactiveComponent } from './views/reactive/reactive.component';
 
 export const routes: Routes = [
   // {path: '', redirectTo:'/users',pathMatch:'full'}, //if we want /users as our default route
@@ -20,6 +21,7 @@ export const routes: Routes = [
     children: [{ path: 'comments', component: CommentsComponent }],
   },
   { path: 'tdf', component: TdfComponent },
+  { path: 'reactive', component: ReactiveComponent },
   // at the end add route for 404 (wild card should be the last route)
   { path: '**', component: PageNotFoundComponent },
 ];

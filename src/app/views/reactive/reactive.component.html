@@ -1,0 +1,66 @@
+<div class="max-w-sm mx-auto py-8">
+  <h1 class="text-4xl text-center font-bold mb-6">Registration</h1>
+  <form [formGroup]="regForm">
+    <div class="mb-5">
+      <label class="block mb-2 text-sm font-medium">Username</label>
+      <input
+        type="text"
+        formControlName="userName"
+        class="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border border-gray-300"
+      />
+    </div>
+    <div class="mb-5">
+      <label class="block mb-2 text-sm font-medium">Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        class="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border border-gray-300"
+      />
+    </div>
+    <div class="mb-5">
+      <label class="block mb-2 text-sm font-medium">Confirm Password</label>
+      <input
+        type="password"
+        formControlName="confirmPassword"
+        class="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border border-gray-300"
+      />
+    </div>
+    <!-- nested form group -->
+    <div formGroupName="address">
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium">City</label>
+        <input
+          type="text"
+          formControlName="city"
+          class="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border border-gray-300"
+        />
+      </div>
+      <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium">Country</label>
+        <input
+          type="text"
+          formControlName="country"
+          class="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border border-gray-300"
+        />
+      </div>
+    </div>
+
+    {{ regForm.value | json }}
+    <br />
+    <div class="flex justify-start items-center mt-3">
+      <button
+        type="submit"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      >
+        Register
+      </button>
+      <button
+        type="submit"
+        (click)="loadApiData()"
+        class="ml-3 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+      >
+        Load API Data
+      </button>
+    </div>
+  </form>
+</div>
