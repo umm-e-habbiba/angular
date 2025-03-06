@@ -4,8 +4,11 @@ import {
   FormGroup,
   ReactiveFormsModule,
   FormBuilder,
+  Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { forbiddenNameValidator } from '../../shared/user-name.validator';
+import { passwordValidator } from '../../shared/password-validator';
 @Component({
   selector: 'app-reactive',
   imports: [CommonModule, ReactiveFormsModule],
@@ -15,17 +18,30 @@ import { CommonModule } from '@angular/common';
 export class ReactiveComponent {
   // constructor(private formBuilder: FormBuilder) {}
 
+  get password() {
+    return this.regForm.get('password');
+  }
+  //confirmPassword
+  get confirmPassword() {
+    return this.regForm.get('confirmPassword');
+  }
   formBuilder = inject(FormBuilder);
   // formControls via formBuilder service
-  regForm = this.formBuilder.group({
-    userName: ['ume habiba'],
-    password: [''],
-    confirmPassword: [''],
-    address: this.formBuilder.group({
-      city: [''],
-      country: [''],
-    }),
-  });
+  regForm = this.formBuilder.group(
+    {
+      userName: [
+        'ume habiba',
+        [Validators.required, forbiddenNameValidator(/admin/)],
+      ], //in array first one will be the default value, second will be the validation rules
+      password: ['', [Validators.required, Validators.minLength(5)]], // for multiple validation rules we add array in second value
+      confirmPassword: ['', Validators.required],
+      address: this.formBuilder.group({
+        city: [''],
+        country: [''],
+      }),
+    },
+    { validator: passwordValidator }
+  );
 
   // regForm = new FormGroup({
   //   userName: new FormControl('ume'),

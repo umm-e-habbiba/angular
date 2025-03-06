@@ -2,28 +2,96 @@
   <h1 class="text-4xl text-center font-bold mb-6">Registration</h1>
   <form [formGroup]="regForm">
     <div class="mb-5">
-      <label class="block mb-2 text-sm font-medium">Username</label>
+      <label
+        class="block mb-2 text-sm font-medium"
+        [class.text-red-700.dark:text-red-500]="
+          regForm.get('userName')?.invalid && regForm.get('userName')?.touched
+        "
+        >Username</label
+      >
       <input
         type="text"
         formControlName="userName"
+        [class.bg-red-50.border.border-red-500.text-red-900.placeholder-red-700.text-red-700.dark:text-red-500]="
+          regForm.get('userName')?.invalid && regForm.get('userName')?.touched
+        "
         class="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border border-gray-300"
       />
+      <!-- <p
+        [class.hidden]="
+          regForm.get('userName')?.valid || regForm.get('userName')?.untouched
+        "
+        class="mt-2 text-sm text-red-600 dark:text-red-500"
+      >
+        Username is required.
+      </p> -->
+      <div
+        *ngIf="
+          regForm.get('userName')?.invalid && regForm.get('userName')?.touched
+        "
+        class="mt-2 text-sm text-red-600 dark:text-red-500"
+      >
+        <p *ngIf="regForm.get('userName')?.errors?.['required']">
+          Username is required
+        </p>
+        <p *ngIf="regForm.get('userName')?.errors?.['forbiddenName']">
+          {{regForm.get('userName')?.errors?.['forbiddenName'].value}} username
+          not allowed
+        </p>
+      </div>
     </div>
     <div class="mb-5">
-      <label class="block mb-2 text-sm font-medium">Password</label>
+      <label
+        class="block mb-2 text-sm font-medium"
+        [class.text-red-700.dark:text-red-500]="
+          password?.invalid && password?.touched
+        "
+        >Password</label
+      >
       <input
-        type="password"
+        type="text"
         formControlName="password"
+        [class.bg-red-50.border.border-red-500.text-red-900.placeholder-red-700.text-red-700.dark:text-red-500]="
+          password?.invalid && password?.touched
+        "
         class="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border border-gray-300"
       />
+      <div
+        *ngIf="password?.invalid && password?.touched"
+        class="mt-2 text-sm text-red-600 dark:text-red-500"
+      >
+        <p *ngIf="password?.errors?.['required']">Password is required.</p>
+        <p *ngIf="password?.errors?.['minlength']">
+          Password must be of at least 5 characters.
+        </p>
+      </div>
     </div>
     <div class="mb-5">
-      <label class="block mb-2 text-sm font-medium">Confirm Password</label>
+      <label
+        class="block mb-2 text-sm font-medium"
+        [class.text-red-700.dark:text-red-500]="
+          confirmPassword?.invalid && confirmPassword?.touched
+        "
+        >Confirm Password</label
+      >
       <input
-        type="password"
+        type="text"
         formControlName="confirmPassword"
+        [class.bg-red-50.border.border-red-500.text-red-900.placeholder-red-700.text-red-700.dark:text-red-500]="
+          confirmPassword?.invalid && confirmPassword?.touched
+        "
         class="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border border-gray-300"
       />
+      <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+        <p *ngIf="confirmPassword?.invalid && confirmPassword?.touched">
+          Confirm Password is required.
+        </p>
+        <p
+          *ngIf="confirmPassword?.value.length > 0 && regForm?.errors?.['mismatch']"
+        >
+          Passwords do not match.
+        </p>
+      </div>
     </div>
     <!-- nested form group -->
     <div formGroupName="address">
