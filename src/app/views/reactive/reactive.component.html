@@ -95,21 +95,40 @@
     </div>
     <!-- conditional validation -->
     <div class="mb-5">
-      <label
-        class="block mb-2 text-sm font-medium"
-        [class.text-red-700.dark:text-red-500]="
-          email?.invalid && email?.touched
-        "
-        >Email</label
-      >
+      <div class="flex justify-start items-center mb-3">
+        <label
+          class="block mb-2 text-sm font-medium"
+          [class.text-red-700.dark:text-red-500]="
+            email?.invalid && email?.touched
+          "
+          >Email</label
+        >
+        <button
+          type="submit"
+          (click)="addAlternateEmailFields()"
+          class="cursor-pointer ml-3 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs w-full sm:w-auto px-5 py-1 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+        >
+          Add Email
+        </button>
+      </div>
       <input
         type="email"
         formControlName="email"
         [class.bg-red-50.border.border-red-500.text-red-900.placeholder-red-700.text-red-700.dark:text-red-500]="
           email?.invalid && email?.touched
         "
-        class="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border border-gray-300"
+        class="text-sm mb-5 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border border-gray-300"
       />
+      <div
+        formArrayName="alternateEmail"
+        *ngFor="let email of alternateEmail.controls; let i = index"
+      >
+        <input
+          type="email"
+          [formControlName]="i"
+          class="text-sm mb-5 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border border-gray-300"
+        />
+      </div>
       <div class="mt-2 text-sm text-red-600 dark:text-red-500">
         <p *ngIf="email?.invalid && email?.touched">Email is required.</p>
       </div>
@@ -127,6 +146,17 @@
     </div>
 
     <!-- nested form group -->
+
+    <div class="flex justify-start items-center">
+      <label class="block mb-2 text-sm font-medium">Address</label>
+      <button
+        type="submit"
+        (click)="addAlternateAddressFields()"
+        class="cursor-pointer ml-3 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs w-full sm:w-auto px-5 py-1 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+      >
+        Add More Addresses
+      </button>
+    </div>
     <div formGroupName="address">
       <div class="mb-5">
         <label class="block mb-2 text-sm font-medium">City</label>
@@ -143,6 +173,36 @@
           formControlName="country"
           class="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border border-gray-300"
         />
+      </div>
+    </div>
+    <div formArrayName="alternateAddress">
+      <div
+        *ngFor="let address of alternateAddress.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <button
+          type="submit"
+          (click)="removeField(i)"
+          class="cursor-pointer mb-5 w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+        >
+          Remove added address
+        </button>
+        <div class="mb-5">
+          <label class="block mb-2 text-sm font-medium">City</label>
+          <input
+            type="text"
+            formControlName="city"
+            class="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border border-gray-300"
+          />
+        </div>
+        <div class="mb-5">
+          <label class="block mb-2 text-sm font-medium">Country</label>
+          <input
+            type="text"
+            formControlName="country"
+            class="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border border-gray-300"
+          />
+        </div>
       </div>
     </div>
 

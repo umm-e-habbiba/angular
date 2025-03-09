@@ -5,6 +5,7 @@ import {
   ReactiveFormsModule,
   FormBuilder,
   Validators,
+  FormArray,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { forbiddenNameValidator } from '../../shared/user-name.validator';
@@ -23,14 +24,43 @@ export class ReactiveComponent implements OnInit {
   get password() {
     return this.regForm.get('password');
   }
-  //confirmPassword
+  // get confirmPassword
   get confirmPassword() {
     return this.regForm.get('confirmPassword');
   }
-  //confirmPassword
+  //get email
   get email() {
     return this.regForm.get('email');
   }
+  //get alternate email
+  get alternateEmail() {
+    return this.regForm.get('alternateEmail') as FormArray;
+  }
+
+  //add formfields
+  addAlternateEmailFields() {
+    (<FormArray>this.regForm.controls['alternateEmail']).push(
+      this.formBuilder.control('')
+    );
+  }
+  //get alternate address
+  get alternateAddress() {
+    return this.regForm.get('alternateAddress') as FormArray;
+  }
+
+  //add formfields
+  addAlternateAddressFields() {
+    const fieldGroup = this.formBuilder.group({
+      city: [''],
+      country: [''],
+    });
+    this.alternateAddress.push(fieldGroup); // Add field to the array
+  }
+
+  removeField(index: number) {
+    this.alternateAddress.removeAt(index); // Remove field from the array
+  }
+
   formBuilder = inject(FormBuilder);
   // formControls via formBuilder service
   ngOnInit(): void {
@@ -48,6 +78,8 @@ export class ReactiveComponent implements OnInit {
           city: [''],
           country: [''],
         }),
+        alternateEmail: this.formBuilder.array([]),
+        alternateAddress: this.formBuilder.array([]),
       },
       { validator: passwordValidator } //cross-field validation
     );
