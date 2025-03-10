@@ -10,14 +10,21 @@ import {
 import { CommonModule } from '@angular/common';
 import { forbiddenNameValidator } from '../../shared/user-name.validator';
 import { passwordValidator } from '../../shared/password-validator';
+import { HttpClientModule } from '@angular/common/http';
+import { RegistrationService } from '../../registration.service';
 @Component({
   selector: 'app-reactive',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
   templateUrl: './reactive.component.html',
   styleUrl: './reactive.component.scss',
 })
 export class ReactiveComponent implements OnInit {
+  success = false;
+  error = false;
+  loading = false;
+
   // constructor(private formBuilder: FormBuilder) {}
+  constructor(private _regService: RegistrationService) {}
 
   regForm!: FormGroup;
 
@@ -126,5 +133,28 @@ export class ReactiveComponent implements OnInit {
       //   country: 'Pakistan',
       // },
     });
+  }
+
+  onSubmit() {
+    // console.log(this.regForm.value);
+    this.loading = true;
+    this._regService.register(this.regForm.value).subscribe(
+      (data) => {
+        console.log(data);
+        this.success = true;
+        this.loading = false;
+        setTimeout(() => {
+          this.success = false;
+        }, 3000);
+      },
+      (error) => {
+        console.log('error!', error);
+        this.error = true;
+        this.loading = false;
+        setTimeout(() => {
+          this.error = false;
+        }, 3000);
+      }
+    );
   }
 }

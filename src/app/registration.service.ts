@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from './user';
 @Injectable({
   providedIn: 'root',
 })
-export class SubmitFormService {
+export class RegistrationService {
+  constructor(private http: HttpClient) {}
   _url = 'https://jsonplaceholder.typicode.com/posts';
 
-  constructor(private _http: HttpClient) {}
-  submit(user: User) {
-    return this._http.post(this._url, user);
+  register(user: any) {
+    return this.http.post(this._url, user);
   }
 }
